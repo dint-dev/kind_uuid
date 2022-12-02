@@ -98,15 +98,12 @@ abstract class Uuid implements Comparable<Uuid> {
     7,
   ];
 
-  /// A pattern for [regExp].
-  static const _uuidCharPattern = '[0-9a-fA-F]';
+  /// For [pattern].
+  static const _hexChars = '[0-9a-fA-F]';
 
   /// Regular expression pattern.
-  static const String pattern = '^$_uuidCharPattern{8}-'
-      '$_uuidCharPattern{4}-'
-      '$_uuidCharPattern{4}-'
-      '$_uuidCharPattern{4}-'
-      '$_uuidCharPattern{12}\$';
+  static const String pattern =
+      '^$_hexChars{8}-$_hexChars{4}-$_hexChars{4}-$_hexChars{4}-$_hexChars{12}\$';
 
   /// Default random number generator for generating UUIDs.
   ///
@@ -1017,8 +1014,8 @@ abstract class Uuid implements Comparable<Uuid> {
     return left.variant.compareTo(right.variant);
   }
 
-  /// Returns [DateTime] given 48-bit parameter p0 and 32-bit
-  /// parameter p1.
+  /// Returns [DateTime] given 48-bit unsigned integer [p0] and 32-bit
+  /// unsigned integer [p1].
   static DateTime? dateTimeFromInternalParameters(int p0, int p1) {
     if (isJs) {
       // In Javascript, DateTime has millisecond precision.
@@ -1048,9 +1045,8 @@ abstract class Uuid implements Comparable<Uuid> {
     }
   }
 
-  /// Sets factory used by [Uuid] default constructor.
-  ///
-  /// If the method is called before, calling it again will throw [StateError].
+  /// Sets factory used by [Uuid] default constructor and prevents future
+  /// changes.
   ///
   /// ## Example
   /// ```
@@ -1072,12 +1068,11 @@ abstract class Uuid implements Comparable<Uuid> {
     _defaultFactory = f;
   }
 
-  /// Parses canonical UUID string.
-  ///
-  /// Returns `null` if parsing fails.
+  /// Parses UUID string and returns `null` if parsing fails.
   ///
   /// ## Example
   /// ```
+  /// import 'package:kind_uuid/kind_uuid.dart';
   ///
   /// void main() {
   ///   final uuid = Uuid.tryParse('f81d4fae-7dec-11d0-a765-00a0c91e6bf6');
@@ -1128,8 +1123,8 @@ abstract class Uuid implements Comparable<Uuid> {
     return result;
   }
 
-  /// If you are not happy with [defaultRandom] being [UuidRandom.instance],
-  /// this changes it to [Random.secure] permanently.
+  /// If you are not happy with [defaultRandom] being [UuidRandom],
+  /// this changes it to [Random.secure] and prevents future changes.
   static void useSystemRandomByDefault() {
     _defaultRandom = Random.secure();
   }

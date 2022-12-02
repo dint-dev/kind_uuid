@@ -70,13 +70,13 @@ void main() {
 ```
 
 All the supported versions are:
-  * [Uuid.random](https://pub.dev/documentation/kind_uuid/latest/kind_uuid/Uuid/random.html)
+  * [Uuid.random](https://pub.dev/documentation/kind_uuid/latest/kind_uuid/Uuid/Uuid.random.html)
     generates UUIDs with version 4 ([RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122)).
-  * [Uuid.timestampedV1](https://pub.dev/documentation/kind_uuid/latest/kind_uuid/Uuid/timestampedV1.html)
+  * [Uuid.timestampedV1](https://pub.dev/documentation/kind_uuid/latest/kind_uuid/Uuid/Uuid.timestampedV1.html)
     generates UUIDs with version 1 ([RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122)).
-  * [Uuid.timestampedV6](https://pub.dev/documentation/kind_uuid/latest/kind_uuid/Uuid/timestampedV6.html)
+  * [Uuid.timestampedV6](https://pub.dev/documentation/kind_uuid/latest/kind_uuid/Uuid/Uuid.timestampedV6.html)
     generates UUIDs with version 6 ([RFC draft](https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis)).
-  * [Uuid.timestampedV7](https://pub.dev/documentation/kind_uuid/latest/kind_uuid/Uuid/timestampedV6.html)
+  * [Uuid.timestampedV7](https://pub.dev/documentation/kind_uuid/latest/kind_uuid/Uuid/Uuid.timestampedV7.html)
     generates UUIDs with version 7 ([RFC draft](https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis)).
 
 
@@ -85,9 +85,9 @@ All the supported versions are:
 If you don't specify _DateTime_ yourself, it is taken from the zone-local [clock](https://pub.dev/documentation/clock/latest/clock/clock.html)
 (in [package:clock](https://pub.dev/packages/clock)). In Dart, _DateTime_ has millisecond
 precision in browsers and microsecond precision in other platforms.
-If the system clock moves backward (because of time synchronization), a small (under 1 second)
-change is ignored and the previous clock value will be returned until the system clock is greater
-than it. Thus timestamps tend to retain the real chronological order.
+If the system clock moves backward (because of network time synchronization), a small (under 1
+second) change is ignored and the previous clock value will be returned until the system clock is
+greater than it. Thus timestamps tend to retain the real chronological order.
 
 The (usually 14 bit) "clock sequence" field has a random value. If timestamp is equal to the
 previous timestamp, the previous clock sequence value is incremented by a random amount. Integer

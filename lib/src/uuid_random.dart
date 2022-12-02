@@ -18,14 +18,8 @@ import 'dart:typed_data';
 /// A random number number generator for generating UUIDs that can be 100-1000
 /// times faster than [Random.secure].
 ///
-/// The algorithm is based on the widely used ChaCha20 cipher. We use only 8
-/// rounds by default. It's important to note that, while the 8 round version
-/// is good enough for UUID generation, this MUST NOT be used for other
-/// purposes.
-///
-/// In the beginning and every N blocks (default: 65k, which is >100k UUIDs),
-/// both the state block and the secret block are mixed (XOR) with
-/// blocks from [Random.secure].
+/// See [pub.dev/packages/kind_uuid](https://pub.dev/packages/kind_uuid) for
+/// explanation of the algorithm.
 class UuidRandom implements Random {
   static const int _bit32 = 0x100000000;
 
@@ -61,11 +55,13 @@ class UuidRandom implements Random {
   /// Constructs a new UUID random number generator.
   ///
   /// The number of ChaCha20 rounds done for each block (20 in ChaCha20, but
-  /// UUIDs can do with fewer) is determined by [chaChaRounds] (default: 8).
+  /// UUIDs can do with fewer) is determined by [chaChaRounds] (default:
+  /// [defaultChaChaRounds]).
   ///
-  /// Optional parameter [blocksBeforeSystemCall] (default: around 65k blocks)
-  /// specifies how many blocks is generated before the state block and the
-  /// secret block are mixed (XOR) with blocks from [random].
+  /// Optional parameter [blocksBeforeSystemCall] (default:
+  /// [defaultBlocksBeforeSystemCall]) specifies how many blocks is generated
+  /// before the state block and the secret block are mixed (XOR) with blocks
+  /// from [random].
   UuidRandom({
     int chaChaRounds = defaultChaChaRounds,
     int blocksBeforeSystemCall = defaultBlocksBeforeSystemCall,
