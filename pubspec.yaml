@@ -1,5 +1,5 @@
 name: kind_uuid
-version: 1.0.0
+version: 1.0.1
 description: A performant UUID implementation that supports the two common UUID
   versions (1 and 4) and two IETF standard drafts (6 and 7).
 homepage: https://github.com/dint-dev/kind_uuid

@@ -362,7 +362,7 @@ void main() {
     });
 
     test('compareTo()', () {
-      final f = Uuid.fromInternalParameters;
+      Uuid f(int a, int b, int c) => Uuid.fromInternalParameters(a, b, c);
       {
         final a = f(0, 0, 2);
         expect(a.compareTo(f(0, 0, 3)), -1);
@@ -383,7 +383,7 @@ void main() {
       }
     });
     test('Uuid.compareByBytes', () {
-      final f = Uuid.fromInternalParameters;
+      Uuid f(int a, int b, int c) => Uuid.fromInternalParameters(a, b, c);
       final c = Uuid.compareByBytes;
       {
         final a = f(0, 0, 2);
